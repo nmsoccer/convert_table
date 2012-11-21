@@ -1,0 +1,15 @@
+<typelib>
+	<macros>
+		<macro name="RES_ID_ARRAY" id="1"/>
+		<macro name="GOD_SKILL_HAND" id="2"/>
+	</macros>	
+
+	<type name="ResSkillAttr">
+		<item name="Attr" type="char"/>
+		<item name="BookID" type="int">20</item>
+	</type>
+	<type name="ResMM">
+		<item name="ID" type="int"/>
+	</type>
+	
+</typelib>
