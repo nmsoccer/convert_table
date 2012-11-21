@@ -2,7 +2,7 @@
 	<macros>
 		<macro name="RES_ID_ARRAY" id="1"/>
 		<macro name="GOD_SKILL_HAND" id="2"/>
-	</macros>	
+	</macros>
 
 	<type name="ResSkillAttr">
 		<item name="Attr" type="char"/>
@@ -11,5 +11,5 @@
 	<type name="ResMM">
 		<item name="ID" type="int"/>
 	</type>
-	
+
 </typelib>
