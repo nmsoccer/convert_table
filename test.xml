@@ -1,15 +1,100 @@
+<!--
+资源类型配置文件：
+xml2res.py会将xx_res.xml解析成xx_res.h头文件与xx_res.bin解表参考文件
+由于资源文件来自表格，所以该文件需要遵守以下几个规则：
+1.所有宏定义位于<macros></macros>中，每一个宏为<macro name="xx" id="xx" />。使用宏时不能相互引用、运算；只能直接定义为数，直接使用
+2.数据结构为<type name=""></type>每个成员是<item></item>
+3.数据结构成员<item>的属性有name,type是必须；count是可选，用于定义数组。注意由于表格的特点，对于基本类型，数组只能使用字符数组不提供其他
+基本类型的数组（可以使用结构体数组）。这也是可以理解，因为表格中每一列都对应数据结构的一项，字符数组可以单独成列，但其他整形数组显然不能单独成列；而必须分开成多列使用。
+  <item name="" type="" count=""/>
+4.在使用结构体数组时，结构体类型必须在使用之前定义
+5.在xml中不显示定义指针，如果需要指针则用字符数组隐含定义
+6.数组只提供一维数组。
+数据基本类型：
+字符：char
+无类型字符:uchar
+字：short
+无符号字：ushort
+整形：int
+无符号整形：uint
+长整形:long
+无符号长整形：ulong
+浮点数：float
+双精度：double
+
+-->
 <typelib>
-	<macros>
-		<macro name="RES_ID_ARRAY" id="1"/>
-		<macro name="GOD_SKILL_HAND" id="2"/>
+ 	<macros>
+        <macro name="RES_ID_ARRAY" id="1" />
+        <macro name="RES_VERSION" id="1" />
+        <macro name="RES_MAGIC" id="0x5566" />
+        <macro name="RES_MAX_NAME_LEN" id="32" />
+        <macro name="RES_MAX_BIRTH_MAP" id="16" />
+        <macro name="RES_MAX_CHARGE_MAP" id="16" />
+        <macro name="RES_MAX_LDESC_LEN" id="256" />
+        <macro name="RES_TIP_DESC_LEN" id="512" />
+        <macro name="RES_MAX_DESC_LEN" id="128" />
+        <macro name="RES_MAX_DIALOG_LEN" id="64" />
+        <macro name="RES_MAX_HINT_LEN" id="512" />
+        <macro name="RES_MAX_RANDOM_ENTRIES" id="10" />
+        <macro name="RES_TYPE_NOCOUNT" id="111" desc="怪物不计数，不增加地图怪物数"/>
+        <macro name="RES_MAX_DROPITEMS" id="32" />
+        <macro name="RES_MAX_AWARD" id="32" />
 	</macros>
 
-	<type name="ResSkillAttr">
-		<item name="Attr" type="char"/>
-		<item name="BookID" type="int">20</item>
-	</type>
-	<type name="ResMM">
-		<item name="ID" type="int"/>
-	</type>
+<type name="leiming">
+    <item name="Total" type="int" />
+    <item name="ID" type="int" />
+
+    <item name="Type" type="char" />
+    <item name="Num" type="int" />
+    <item name="awards" type="int"/>
+</type>
+
+
+<type name="resmonster">
+    <item name="id" type="uint" />
+    <item name="name" type="char" count="RES_MAX_NAME_LEN" />
+    <item name="max_hp" type="uint" />
+    <item name="hp_recover" type="int" />
+    <item name="phys_attack" type="long" />
+    <item name="magic_attack" type="long" />
+</type>
+
+<type name="x2">
+    <item name="id" type="int" />
+    <item name="usecard" type="char" />
+    <item name="person" type="resmonster" count="RES_MAX_RANDOM_ENTRIES"/>
+</type>
+
+
+
+
+
+<type name="ResAward" >
+    <item name="ID" type="int" />
+    <item name="Type" type="char" />
+    <item name="Num" type="int" />
+    <item name="GiveWinner" type="char" />
+    <item name="GiveLoser" type="char" />
+    <item name="GiveMember" type="char" />
+    <item name="GiveFmLeader" type="char" />
+</type>
+
+
+
+<type name="ResPworldEvaluate">
+    <item name="Id" type="int" />
+    <item name="PworldInstId" type="int" />
+    <item name="DeathSubScore"  type="short"  desc="单次死亡扣分" />
+    <item name="ExpendSubScore" type="short"  desc="单次消耗品扣分" />
+    <item name="PlayerLevelSub" type="short"  desc="玩家扣分等级"   />
+    <item name="LevelSubScore"  type="short"  desc="超出每等级扣分" />
+    <item name="PredictTime"    type="long"   desc="预估时间" />
+    <item name="TimeSubScore"   type="short"  desc="超出每秒时间扣分" />
+    <item name="InitTotalScore" type="int"    desc="初始总分"   />
+</type>
+
+
 
 </typelib>
